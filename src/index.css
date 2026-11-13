@@ -753,3 +753,80 @@ select.field option {
     radial-gradient(circle at 50% 40%, rgb(8 122 255 / 0.35), transparent 62%),
     linear-gradient(160deg, #071329, #030c25);
 }
+
+/* ---------- Hero mobile (referência aprovada) ---------- */
+.m-hero-portrait {
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent 0%, #000 5%, #000 62%, transparent 98%),
+    linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to bottom, transparent 0%, #000 5%, #000 62%, transparent 98%),
+    linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%);
+  mask-composite: intersect;
+}
+.hero-n-glow {
+  filter: drop-shadow(0 0 18px rgb(8 122 255 / 0.85)) drop-shadow(0 0 40px rgb(8 122 255 / 0.45));
+}
+.m-hero-title {
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  /* cabe na largura com as quebras definidas no texto (~0.53em por caractere) */
+  font-size: min(2.15rem, calc(var(--m-text) / (var(--chars) * 0.53)));
+}
+.m-hero-title > span > span > span {
+  white-space: nowrap;
+}
+.m-hero-underline {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.12em;
+}
+.m-hero-underline::after {
+  content: '';
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  bottom: 0;
+  height: 0.09em;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, #087aff 18%, #11c8ff 50%, #087aff 82%, transparent);
+  box-shadow: 0 0 12px rgb(17 160 255 / 0.8);
+}
+.m-hero-primary {
+  background: linear-gradient(90deg, #0a5ff0 0%, #1688ff 100%);
+  box-shadow:
+    0 12px 30px -8px rgb(8 122 255 / 0.85),
+    inset 0 1px 0 rgb(255 255 255 / 0.25);
+  transition:
+    transform 0.2s var(--ease-out-soft),
+    box-shadow 0.3s var(--ease-out-soft);
+}
+.m-hero-primary:active {
+  transform: scale(0.98);
+  box-shadow: 0 6px 18px -6px rgb(8 122 255 / 0.9);
+}
+@keyframes chev-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+.chev-float svg {
+  animation: chev-float 1.8s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .chev-float svg {
+    animation: none;
+  }
+}
+/* Telas muito estreitas: palavra NEXAWEB um pouco menor para não encostar no seletor de idioma */
+@media (max-width: 359px) {
+  header .logo-wordmark {
+    height: 10px;
+  }
+}

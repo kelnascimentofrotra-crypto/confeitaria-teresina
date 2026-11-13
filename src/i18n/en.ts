@@ -257,6 +257,12 @@ export const en: Dictionary = {
     menuTitle: 'Navigation menu',
     hero: {
       eyebrow: 'Strategic digital design',
+      badge: 'Web development',
+      titleLines: ['Give your brand', 'a website that truly'],
+      titleHighlight: 'sells for you',
+      intro: 'From the first click to the decision, I build websites that elevate your brand and bring in clients.',
+      projects: 'Projects',
+      scrollLabel: 'Scroll to the next section',
       lines: ['Give your brand', 'a website that'],
       highlight: ['truly sells', 'for you.'],
       lead: 'Websites with identity, strategy and a focus on growing your business.',

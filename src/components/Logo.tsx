@@ -20,7 +20,7 @@ export function LogoLockup({ className }: { className?: string }) {
   return (
     <span className={cn('inline-flex items-center gap-2.5', className)}>
       <Img src={mark} alt="" width={128} height={118} decoding="async" className="h-8 w-auto" />
-      <Img src={wordmark} alt="NEXAWEB" width={260} height={32} decoding="async" className="h-[13px] w-auto" />
+      <Img src={wordmark} alt="NEXAWEB" width={260} height={32} decoding="async" className="logo-wordmark h-[13px] w-auto" />
     </span>
   )
 }

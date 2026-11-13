@@ -273,6 +273,12 @@ export const pt = {
     menuTitle: 'Menu de navegação',
     hero: {
       eyebrow: 'Design digital estratégico',
+      badge: 'Desenvolvimento web',
+      titleLines: ['Faça sua marca ter', 'um site que realmente'],
+      titleHighlight: 'vende por você',
+      intro: 'Do primeiro clique à decisão, eu crio sites que valorizam sua marca e geram clientes.',
+      projects: 'Projetos',
+      scrollLabel: 'Rolar para a próxima seção',
       lines: ['Faça sua marca ter', 'um site que'],
       highlight: ['realmente vende', 'por você.'],
       lead: 'Sites com identidade, estratégia e foco no crescimento do seu negócio.',

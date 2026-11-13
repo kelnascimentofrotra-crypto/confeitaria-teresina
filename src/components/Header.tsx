@@ -5,6 +5,7 @@ import { useActiveSection } from '../hooks/useActiveSection'
 import { useScrolled } from '../hooks/useScrolled'
 import { useI18n } from '../i18n'
 import { cn } from '../lib/cn'
+import { LanguagePill } from './LanguagePill'
 import { LogoLockup, LogoMark } from './Logo'
 import { MenuDrawer } from './MenuDrawer'
 
@@ -90,7 +91,8 @@ export function Header() {
             </div>
 
             <div className="flex items-center gap-1 sm:gap-2">
-              <LanguageButton />
+              <LanguageButton className="max-md:hidden" />
+              <LanguagePill className="md:hidden" />
               <button
                 ref={menuButton}
                 type="button"
