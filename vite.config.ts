@@ -16,7 +16,8 @@ function seo(siteUrl: string): Plugin {
     },
     transformIndexHtml(html, ctx) {
       // A foto do hero começa a baixar antes do JavaScript (melhora o LCP).
-      if (ctx.bundle) {
+      // No build de arquivo único as imagens já vão embutidas, então não há o que pré-carregar.
+      if (ctx.bundle && !singleFile) {
         const find = (re: RegExp) => Object.keys(ctx.bundle!).find((f) => re.test(f))
         const photo = find(/hero-photo-[\w-]+\.webp$/)
         const photo2x = find(/hero-photo-2x-[\w-]+\.webp$/)
@@ -57,10 +58,21 @@ function seo(siteUrl: string): Plugin {
   }
 }
 
+/** SINGLEFILE=1: build com imagens e fontes embutidas (para hospedagens que só aceitam um HTML). */
+const singleFile = process.env.SINGLEFILE === '1'
+
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   return {
     plugins: [react(), tailwindcss(), seo(env.SITE_URL ?? '')],
-    build: { target: 'es2020', cssCodeSplit: false },
+    build: {
+      target: 'es2020',
+      cssCodeSplit: false,
+      ...(singleFile && {
+        assetsInlineLimit: () => true,
+        modulePreload: false,
+        rollupOptions: { output: { inlineDynamicImports: true } },
+      }),
+    },
   }
 })
