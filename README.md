@@ -43,7 +43,7 @@ docs/referencias-aprovadas/   as 9 telas aprovadas usadas como direção de arte
 
 ## Origem das imagens
 
-- **Retrato do hero:** foto real fornecida (`brand/FOTO_ROSTO_REAL.jpg`), apenas com o fundo removido e uma luz azul adicionada *atrás* da silhueta. Rosto sem retoque.
+- **Retrato do hero:** foto real fornecida (`brand/FOTO_HERO_CASACO.png`), apenas com o fundo removido e uma luz azul adicionada *atrás* da silhueta. Rosto sem retoque.
 - **Logo:** extraído do arquivo original sobre preto, sem redesenho.
 - **Carteira, Terra, mão com o logo e nuvens:** recortados das telas aprovadas (`docs/referencias-aprovadas/`).
 - Os prints de Instagram de terceiros do guia **não** foram incluídos no projeto.

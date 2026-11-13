@@ -1,7 +1,6 @@
 import { m } from 'framer-motion'
-import portrait520 from '../assets/img/hero-portrait-520.webp'
-import portrait800 from '../assets/img/hero-portrait-800.webp'
-import portrait1200 from '../assets/img/hero-portrait-1200.webp'
+import portrait from '../assets/img/hero-portrait.webp'
+import portrait2x from '../assets/img/hero-portrait-2x.webp'
 import { CtaButton } from '../components/CtaButton'
 import { QuoteButton } from '../components/QuoteButton'
 import { RevealLines } from '../components/Reveal'
@@ -29,11 +28,11 @@ export function Hero() {
           transition={{ duration: 1.3, delay: 0.1, ease }}
         >
           <img
-            src={portrait800}
-            srcSet={`${portrait520} 520w, ${portrait800} 800w, ${portrait1200} 1200w`}
-            sizes="(min-width: 768px) 68vh, 46vh"
-            width={1200}
-            height={1600}
+            src={portrait}
+            srcSet={`${portrait} 448w, ${portrait2x} 896w`}
+            sizes="(min-width: 768px) 70vh, 44vh"
+            width={448}
+            height={573}
             alt={t.hero.portraitAlt}
             fetchPriority="high"
             decoding="async"
