@@ -18,6 +18,9 @@
 
 /* ---------- Base ---------- */
 html {
+  /* reserva o espaço da barra de rolagem desde o primeiro quadro: quando as seções de baixo
+     são montadas, a barra aparece sem empurrar a página para o lado */
+  scrollbar-gutter: stable;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   background: var(--color-ink);
