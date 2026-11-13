@@ -179,6 +179,26 @@ export const en: Dictionary = {
     text: 'Every company has a different goal. That is why I seek to understand what needs to happen for an investment in a new website to have purpose and create value for the business.',
     imageAlt: 'Hand holding a glowing blue glass tile with the NEXAWEB logo',
   },
+  founder: {
+    label: 'The mind behind NEXAWEB',
+    labelSub: 'The person who created and leads the brand',
+    eyebrow: 'Founder & Creator',
+    titleA: 'Behind every great project,',
+    titleB: 'there is a vision.',
+    hello: 'Nice to meet you, I’m',
+    name: 'Miguel',
+    intro:
+      'I am the founder of NEXAWEB. I believe that technology, when combined with strategy, creativity and business vision, can transform the way a company presents itself to the world.',
+    mission:
+      'My mission is to build digital experiences that go beyond appearance. I want to develop projects that convey trust, elevate brands and help businesses see new possibilities.',
+    quoteA: 'I don’t want to just build websites.',
+    quoteB: 'I want to build experiences that make businesses evolve.',
+    role: 'Founder — NEXAWEB',
+    closingA: 'Great businesses deserve digital experiences',
+    closingB: 'to match.',
+    portraitAlt: 'Miguel, founder of NEXAWEB',
+    next: 'Continue to the frequently asked questions',
+  },
   faq: {
     title: 'Frequently Asked Questions',
     items: [

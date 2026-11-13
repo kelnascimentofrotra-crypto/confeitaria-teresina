@@ -1,4 +1,5 @@
 import { LazyMotion, MotionConfig, domMax } from 'framer-motion'
+import { DeferredFounder } from './components/founder/DeferredFounder'
 import { Header } from './components/Header'
 import { useIsMobile } from './hooks/useIsMobile'
 import { useI18n } from './i18n'
@@ -48,6 +49,7 @@ export default function App() {
               <MobileDifferentials />
               <MobileSolutions />
               <MobileMission />
+              <DeferredFounder />
               <Faq />
               <MobileContact />
             </>
@@ -61,6 +63,7 @@ export default function App() {
               <Differentials />
               <Solutions />
               <Mission />
+              <DeferredFounder />
               <Faq />
               <Contact />
             </>

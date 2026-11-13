@@ -3,7 +3,7 @@ import { ArrowRight, ChevronDown, CodeXml, Layers, Rocket } from 'lucide-react'
 import type { CSSProperties } from 'react'
 import portrait from '../../assets/img/hero-portrait.webp'
 import portrait2x from '../../assets/img/hero-portrait-2x.webp'
-import mark from '../../assets/img/logo-mark.webp'
+import markLg from '../../assets/img/logo-mark-lg.webp'
 import { Img } from '../../components/Img'
 import { Reveal, RevealLines } from '../../components/Reveal'
 import { useI18n } from '../../i18n'
@@ -39,7 +39,7 @@ export function MobileHero() {
             animate={{ opacity: 0.85, scale: 1 }}
             transition={{ duration: 1.4, ease }}
           >
-            <Img src={mark} alt="" width={128} height={118} className="hero-n-glow w-full" />
+            <span className="hero-n-glow block aspect-[268/243] w-full bg-contain bg-no-repeat" style={{ backgroundImage: `url(${markLg})` }} />
           </m.div>
           <m.div
             aria-hidden="true"

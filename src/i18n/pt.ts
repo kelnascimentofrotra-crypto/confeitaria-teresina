@@ -195,6 +195,26 @@ export const pt = {
     text: 'Cada empresa tem um objetivo diferente. Por isso, busco entender o que precisa acontecer para que o investimento em um novo site tenha propósito e gere valor ao negócio.',
     imageAlt: 'Mão segurando uma peça de vidro azul iluminada com o logotipo NEXAWEB',
   },
+  founder: {
+    label: 'The mind behind NEXAWEB',
+    labelSub: 'A mente por trás da NEXAWEB',
+    eyebrow: 'Fundador & Idealizador',
+    titleA: 'Por trás de cada grande projeto,',
+    titleB: 'existe uma visão.',
+    hello: 'Prazer, sou',
+    name: 'Miguel',
+    intro:
+      'Sou o fundador da NEXAWEB. Acredito que a tecnologia, quando combinada com estratégia, criatividade e visão de negócio, pode transformar a maneira como uma empresa se apresenta ao mundo.',
+    mission:
+      'Minha missão é construir experiências digitais que vão além da aparência. Quero desenvolver projetos que transmitam confiança, valorizem marcas e ajudem negócios a enxergar novas possibilidades.',
+    quoteA: 'Não quero apenas criar sites.',
+    quoteB: 'Quero construir experiências que façam negócios evoluírem.',
+    role: 'Founder — NEXAWEB',
+    closingA: 'Grandes negócios merecem experiências digitais',
+    closingB: 'à altura.',
+    portraitAlt: 'Miguel, fundador da NEXAWEB',
+    next: 'Continuar para as perguntas frequentes',
+  },
   faq: {
     title: 'Perguntas Frequentes',
     items: [
