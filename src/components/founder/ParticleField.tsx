@@ -40,15 +40,15 @@ export function ParticleField({ started, pointerX, pointerY, reduced }: Props) {
     let raf = 0
     let visible = false
     let t0 = performance.now()
-    const dpr = Math.min(window.devicePixelRatio || 1, 2)
+    let dpr = 1
 
     const seed = () => {
-      const count = Math.max(22, Math.min(64, Math.round((width * height) / 21000)))
+      const count = Math.max(18, Math.min(38, Math.round((width * height) / 30000)))
       particles = Array.from({ length: count }, (_, i) => ({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.16,
-        vy: (Math.random() - 0.5) * 0.16,
+        vx: (Math.random() - 0.5) * 0.32,
+        vy: (Math.random() - 0.5) * 0.32,
         r: 0.7 + Math.random() * 1.7,
         born: reduced ? 0 : (i / count) * 1.6 + Math.random() * 0.4,
         phase: Math.random() * Math.PI * 2,
@@ -60,6 +60,8 @@ export function ParticleField({ started, pointerX, pointerY, reduced }: Props) {
       const rect = canvas.getBoundingClientRect()
       width = rect.width
       height = rect.height
+      // telas grandes: resolução 1x (os pontos são suaves, não se nota e custa bem menos)
+      dpr = width > 900 ? 1 : Math.min(window.devicePixelRatio || 1, 1.5)
       canvas.width = Math.round(width * dpr)
       canvas.height = Math.round(height * dpr)
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
@@ -96,9 +98,12 @@ export function ParticleField({ started, pointerX, pointerY, reduced }: Props) {
         for (let j = i + 1; j < particles.length; j++) {
           const a = particles[i]
           const b = particles[j]
-          const d = Math.hypot(a.x - b.x, a.y - b.y)
-          if (d < 118) {
-            ctx.strokeStyle = `rgba(60,140,255,${(1 - d / 118) * 0.16 * Math.min(alphas[i], alphas[j]) * 2})`
+          const dx = a.x - b.x
+          const dy = a.y - b.y
+          if (dx > 130 || dx < -130 || dy > 130 || dy < -130) continue
+          const d = Math.sqrt(dx * dx + dy * dy)
+          if (d < 130) {
+            ctx.strokeStyle = `rgba(60,140,255,${(1 - d / 130) * 0.16 * Math.min(alphas[i], alphas[j]) * 2})`
             ctx.beginPath()
             ctx.moveTo(a.x, a.y)
             ctx.lineTo(b.x, b.y)
@@ -121,8 +126,13 @@ export function ParticleField({ started, pointerX, pointerY, reduced }: Props) {
       })
     }
 
+    // os pontos se movem devagar: 30 quadros por segundo bastam e deixam folga para a rolagem
+    let lastDraw = 0
     const loop = (now: number) => {
-      draw(now)
+      if (now - lastDraw >= 30) {
+        lastDraw = now
+        draw(now)
+      }
       if (visible && !reduced) raf = requestAnimationFrame(loop)
     }
 

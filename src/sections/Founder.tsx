@@ -1,16 +1,8 @@
-import {
-  m,
-  useInView,
-  useMotionTemplate,
-  useMotionValue,
-  useReducedMotion,
-  useScroll,
-  useSpring,
-  useTransform,
-} from 'framer-motion'
+import { m, useInView, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion'
 import { ArrowDown } from 'lucide-react'
 import { useRef, type CSSProperties, type PointerEvent } from 'react'
 import portrait2x from '../assets/img/hero-portrait-2x.webp'
+import portraitMid from '../assets/img/hero-mid.webp'
 import portrait from '../assets/img/hero-portrait.webp'
 import { ParticleField } from '../components/founder/ParticleField'
 import { ScrubText } from '../components/founder/ScrubText'
@@ -58,29 +50,34 @@ function Words({ text, delay, state, className }: { text: string; delay: number;
 function Closing() {
   const { t } = useI18n()
   const f = t.founder
-  const ref = useRef<HTMLDivElement>(null)
-  const reduce = useReducedMotion()
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 0.92', 'center 0.55'] })
-  const p = useSpring(scrollYProgress, { stiffness: 120, damping: 28, mass: 0.4 })
-  const scaleY = useTransform(p, [0, 1], reduce ? [1, 1] : [0.38, 1])
-  const lift = useTransform(p, [0, 1], reduce ? [0, 0] : [36, 0])
-  const glow = useTransform(p, [0.35, 1], [0, 1])
 
   return (
-    <div ref={ref} className="founder-closing">
-      <m.span className="founder-closing-beam" style={{ scaleY: p }} aria-hidden="true" />
-      <m.div className="founder-closing-glow" style={{ opacity: glow }} aria-hidden="true" />
+    <m.div className="founder-closing" initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.45 }}>
+      <m.span
+        className="founder-closing-beam"
+        aria-hidden="true"
+        variants={{ hidden: { scaleY: 0 }, show: { scaleY: 1, transition: { duration: 0.9, ease } } }}
+      />
+      <m.div
+        className="founder-closing-glow"
+        aria-hidden="true"
+        variants={{ hidden: { opacity: 0 }, show: { opacity: 1, transition: { duration: 1.4, delay: 0.3 } } }}
+      />
       <p className="relative">
         <m.span
           className="founder-closing-lead"
-          initial={{ opacity: 0, y: 22 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.6 }}
-          transition={{ duration: 0.9, ease }}
+          variants={{ hidden: { opacity: 0, y: 22 }, show: { opacity: 1, y: 0, transition: { duration: 0.9, delay: 0.15, ease } } }}
         >
           {f.closingA}
         </m.span>{' '}
-        <m.span className="founder-altura" style={{ scaleY, y: lift }}>
+        {/* "À ALTURA." cresce em altura uma única vez, a partir da base */}
+        <m.span
+          className="founder-altura"
+          variants={{
+            hidden: { opacity: 0, scaleY: 0.4 },
+            show: { opacity: 1, scaleY: 1, transition: { duration: 1.15, delay: 0.5, ease } },
+          }}
+        >
           {f.closingB.toUpperCase()}
         </m.span>
       </p>
@@ -90,7 +87,7 @@ function Closing() {
           <ArrowDown size={20} strokeWidth={2.4} aria-hidden="true" />
         </span>
       </a>
-    </div>
+    </m.div>
   )
 }
 
@@ -106,12 +103,15 @@ export function Founder() {
   const started = useInView(stageRef, { once: true, amount: 0.3 })
   const state = started ? 'show' : 'hidden'
 
-  // ---- Ponteiro (mouse ou toque), normalizado dentro do palco ----
+  // ---- Ponteiro: só o mouse move a cena. O toque não, para que rolar com o dedo não mexa em nada. ----
   const mx = useMotionValue(0.5)
   const my = useMotionValue(0.36)
-  const sx = useSpring(mx, { stiffness: 70, damping: 20, mass: 0.6 })
-  const sy = useSpring(my, { stiffness: 70, damping: 20, mass: 0.6 })
+  // mola rápida e sem balanço: a cena acompanha o cursor de perto e para firme
+  const spring = { stiffness: 260, damping: 34, mass: 0.5 }
+  const sx = useSpring(mx, spring)
+  const sy = useSpring(my, spring)
   const track = (e: PointerEvent<HTMLElement>) => {
+    if (e.pointerType !== 'mouse') return
     const r = stageRef.current?.getBoundingClientRect()
     if (!r) return
     mx.set(clamp01((e.clientX - r.left) / r.width))
@@ -125,7 +125,6 @@ export function Founder() {
 
   // ---- Rolagem ----
   const { scrollYProgress: act } = useScroll({ target: actRef, offset: ['start start', 'end end'] })
-  const { scrollYProgress: pass } = useScroll({ target: stageRef, offset: ['start end', 'end start'] })
 
   // No desktop a foto fica fixa e desliza para a direita enquanto a história rola à esquerda.
   const shift = useTransform(act, (v) => {
@@ -133,26 +132,19 @@ export function Founder() {
     const k = clamp01((v - 0.05) / 0.3)
     return k * k * (3 - 2 * k) * window.innerWidth * 0.215
   })
+  // Paralaxe discreta (poucos pixels), só com mouse; no celular a foto fica parada no palco.
   const parallax = !reduce && isFine
-  const figureX = useTransform([sx, shift], ([p, s]: number[]) => s + (parallax ? (p - 0.5) * 30 : 0))
-  const figureY = useTransform([sy, pass], ([p, s]: number[]) => {
-    if (reduce) return 0
-    if (isFine) return (p - 0.5) * 16
-    return isDesktop ? 0 : (0.5 - s) * 44 // no toque: profundidade pela rolagem
-  })
-  const figureScale = useTransform(act, [0.05, 0.35], [1, isDesktop ? 0.93 : 1])
-  const wordX = useTransform(sx, (p) => (parallax ? (0.5 - p) * 52 : 0))
-  const wordY = useTransform(pass, (s) => (reduce || isDesktop ? 0 : (s - 0.5) * 36))
+  const figureX = useTransform([sx, shift], ([p, s]: number[]) => s + (parallax ? (p - 0.5) * 14 : 0))
+  const figureY = useTransform(sy, (p) => (parallax ? (p - 0.5) * 8 : 0))
+  const wordX = useTransform(sx, (p) => (parallax ? (0.5 - p) * 22 : 0))
   const wordOpacity = useTransform(act, [0.06, 0.34], [1, isDesktop ? 0.28 : 1])
   const helloOpacity = useTransform(act, [0.02, 0.13], [1, isDesktop ? 0 : 1])
-  const frontX = useTransform(sx, (p) => (parallax ? (p - 0.5) * 46 : 0))
-  const frontY = useTransform(sy, (p) => (parallax ? (p - 0.5) * 30 : 0))
+  const frontX = useTransform(sx, (p) => (parallax ? (p - 0.5) * 22 : 0))
+  const frontY = useTransform(sy, (p) => (parallax ? (p - 0.5) * 12 : 0))
 
-  // Luz dinâmica: segue o cursor; no toque acompanha o dedo e a rolagem.
-  const lx = useTransform(sx, (p) => p * 100)
-  const ly = useTransform([sy, pass], ([p, s]: number[]) => (isFine ? p * 100 : 18 + s * 50))
-  const spot = useMotionTemplate`radial-gradient(40rem circle at ${lx}% ${ly}%, rgba(17,120,255,0.22), transparent 64%)`
-  const relight = useMotionTemplate`radial-gradient(75% 60% at ${lx}% ${ly}%, rgba(120,195,255,0.6), transparent 72%)`
+  // Luz dinâmica: um brilho pronto que só é deslocado (transform), sem redesenhar degradês a cada quadro.
+  const lightX = useTransform(sx, (p) => `${(p - 0.5) * 100}%`)
+  const lightY = useTransform(sy, (p) => `${(p - 0.5) * 100}%`)
 
   const pop = (delay: number) => ({
     hidden: { opacity: 0, scale: 0.6 },
@@ -171,14 +163,15 @@ export function Founder() {
       aria-labelledby="founder-title"
       className="founder"
       onPointerMove={track}
-      onPointerDown={track}
       onPointerLeave={release}
     >
       <div ref={actRef} className="founder-act">
         {/* ============ Palco (fixo no desktop) ============ */}
         <div ref={stageRef} className="founder-stage">
           <ParticleField started={started} pointerX={sx} pointerY={sy} reduced={reduce} />
-          <m.div className="founder-spot" style={{ background: spot }} aria-hidden="true" />
+          <m.div className="founder-spot" style={{ x: lightX, y: lightY }} aria-hidden="true">
+            <span />
+          </m.div>
           <div className="founder-grid" aria-hidden="true" />
 
           {/* feixe de luz que atravessa a tela */}
@@ -191,7 +184,7 @@ export function Founder() {
           />
 
           {/* NEXAWEB gigante, em contorno, atrás da figura */}
-          <m.div className="founder-word" style={{ x: wordX, y: wordY, opacity: wordOpacity }} aria-hidden="true">
+          <m.div className="founder-word" style={{ x: wordX, opacity: wordOpacity }} aria-hidden="true">
             {'NEXAWEB'.split('').map((l, i) => (
               <m.span
                 key={i}
@@ -208,7 +201,7 @@ export function Founder() {
           </m.div>
 
           {/* Figura: camadas de fundo, fotografia e elementos da frente */}
-          <m.div className="founder-figure" style={{ x: figureX, y: figureY, scale: figureScale }}>
+          <m.div className="founder-figure" style={{ x: figureX, y: figureY }}>
             <m.div className="founder-label" initial="hidden" animate={state} variants={rise(T.label)}>
               <p className="founder-label-main">
                 <span className="founder-label-dot" aria-hidden="true" />
@@ -241,7 +234,7 @@ export function Founder() {
               >
                 <Img
                   src={portrait}
-                  srcSet={`${portrait} 448w, ${portrait2x} 896w`}
+                  srcSet={`${portrait} 448w, ${portraitMid} 640w, ${portrait2x} 896w`}
                   sizes="(min-width: 1024px) 62vh, 78vw"
                   width={448}
                   height={573}
@@ -251,22 +244,24 @@ export function Founder() {
                   className="founder-portrait"
                 />
                 {/* luz azul sobre a silhueta, que acompanha o cursor (recortada pela própria foto) */}
-                <m.div
-                  className="founder-relight"
-                  aria-hidden="true"
-                  style={{ background: relight, '--portrait': `url(${portrait})` } as unknown as CSSProperties}
-                />
+                {parallax && (
+                  <div className="founder-relight" aria-hidden="true" style={{ '--portrait': `url(${portrait})` } as CSSProperties}>
+                    <m.span style={{ x: lightX, y: lightY }} />
+                  </div>
+                )}
               </m.div>
             </m.div>
 
             {/* linha de varredura que acompanha a revelação */}
             <m.span
-              className="founder-scan"
+              className="founder-scan-wrap"
               aria-hidden="true"
-              initial={{ top: '100%', opacity: 0 }}
-              animate={started ? { top: ['100%', '0%'], opacity: [0, 1, 1, 0] } : { top: '100%', opacity: 0 }}
+              initial={{ y: '100%', opacity: 0 }}
+              animate={started ? { y: ['100%', '0%'], opacity: [0, 1, 1, 0] } : { y: '100%', opacity: 0 }}
               transition={{ duration: 1.3, delay: T.photo, ease: [0.65, 0, 0.2, 1], opacity: { duration: 1.3, delay: T.photo, times: [0, 0.1, 0.85, 1] } }}
-            />
+            >
+              <span className="founder-scan" />
+            </m.span>
 
             {(['tl', 'tr', 'bl', 'br'] as const).map((c, i) => (
               <m.span key={c} className={`founder-corner ${c}`} aria-hidden="true" initial="hidden" animate={state} variants={pop(T.hud + i * 0.08)} />

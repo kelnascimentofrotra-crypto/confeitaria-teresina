@@ -765,9 +765,6 @@ select.field option {
     linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%);
   mask-composite: intersect;
 }
-.hero-n-glow {
-  filter: drop-shadow(0 0 18px rgb(8 122 255 / 0.85)) drop-shadow(0 0 40px rgb(8 122 255 / 0.45));
-}
 .m-hero-title {
   font-weight: 800;
   letter-spacing: -0.035em;
@@ -854,10 +851,36 @@ select.field option {
     radial-gradient(70% 50% at 50% 66%, rgb(8 70 200 / 0.4), transparent 72%),
     linear-gradient(180deg, #000 0%, #030a1f 58%, #02040b 100%);
 }
+/* luz que acompanha o cursor: brilho pronto, apenas deslocado por transform */
 .founder-spot {
   position: absolute;
   inset: 0;
   pointer-events: none;
+  will-change: transform;
+}
+.founder-spot span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(46rem, 130vw);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(17 120 255 / 0.3), transparent 74%);
+}
+/* no toque não há cursor: a luz faz um passeio lento e contínuo */
+@media (hover: none) {
+  .founder-spot span {
+    animation: founder-drift 16s ease-in-out infinite alternate;
+  }
+}
+@keyframes founder-drift {
+  from {
+    transform: translate(-14%, -6%);
+  }
+  to {
+    transform: translate(14%, 8%);
+  }
 }
 /* piso em perspectiva (profundidade) */
 .founder-grid {
@@ -898,6 +921,7 @@ select.field option {
   letter-spacing: -0.02em;
   color: transparent;
   -webkit-text-stroke: 1.5px rgb(70 150 255 / 0.5);
+  will-change: transform;
   user-select: none;
   pointer-events: none;
 }
@@ -908,6 +932,7 @@ select.field option {
 /* ---------- Figura ---------- */
 .founder-figure {
   position: absolute;
+  will-change: transform;
   bottom: 0;
   left: 50%;
   width: calc(var(--fh) * 0.782);
@@ -931,7 +956,7 @@ select.field option {
   gap: 0.6rem;
   border-radius: 999px;
   border: 1px solid rgb(60 140 255 / 0.55);
-  background: rgb(4 12 34 / 0.78);
+  background: rgb(4 12 34 / 0.9);
   padding: 0.5rem 1rem;
   font-size: 0.7rem;
   font-weight: 800;
@@ -939,7 +964,6 @@ select.field option {
   text-transform: uppercase;
   color: #cfe5ff;
   box-shadow: 0 0 22px rgb(8 122 255 / 0.35);
-  backdrop-filter: blur(8px);
   white-space: nowrap;
 }
 .founder-label-dot {
@@ -1009,9 +1033,9 @@ select.field option {
 .founder-relight {
   position: absolute;
   inset: 0;
+  overflow: hidden;
   pointer-events: none;
-  mix-blend-mode: screen;
-  opacity: 0.42;
+  opacity: 0.3;
   -webkit-mask-image: var(--portrait), linear-gradient(to bottom, #000 45%, transparent 82%);
   -webkit-mask-size: 100% 100%;
   -webkit-mask-composite: source-in;
@@ -1019,8 +1043,20 @@ select.field option {
   mask-size: 100% 100%;
   mask-composite: intersect;
 }
+.founder-relight span {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(closest-side, rgb(140 205 255 / 0.9), transparent 78%);
+  will-change: transform;
+}
+.founder-scan-wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
 .founder-scan {
   position: absolute;
+  top: 0;
   left: -8%;
   right: -8%;
   height: 2px;
@@ -1073,8 +1109,7 @@ select.field option {
 .founder-float.chip {
   border-radius: 0.8rem;
   border: 1px solid rgb(90 160 255 / 0.5);
-  background: rgb(6 18 48 / 0.72);
-  backdrop-filter: blur(8px);
+  background: rgb(6 18 48 / 0.9);
   box-shadow: 0 0 20px rgb(8 122 255 / 0.3);
 }
 .founder-float.chip i {
@@ -1216,8 +1251,7 @@ select.field option {
   margin-top: 2.6rem;
   border-radius: 1.4rem;
   border: 1px solid rgb(80 150 255 / 0.3);
-  background: linear-gradient(140deg, rgb(14 36 90 / 0.55), rgb(4 10 30 / 0.6));
-  backdrop-filter: blur(10px);
+  background: linear-gradient(140deg, rgb(12 30 78 / 0.94), rgb(4 10 30 / 0.94));
   padding: 1.7rem 1.5rem 1.6rem 1.7rem;
   font-size: clamp(1.15rem, 4.8vw, 1.45rem);
   font-weight: 700;
@@ -1540,4 +1574,20 @@ select.field option {
   .founder-type > .founder-caret {
     animation: none;
   }
+}
+
+/* Brilho do "N" atrás da foto (hero mobile): silhueta do N preenchida de azul e desfocada.
+   É estático (desenhado uma vez) e não é uma imagem, então não disputa com a foto como elemento principal. */
+.hero-n-halo {
+  position: absolute;
+  inset: 0;
+  filter: blur(16px);
+  opacity: 0.9;
+}
+.hero-n-halo span {
+  position: absolute;
+  inset: 0;
+  background: #087aff;
+  -webkit-mask: var(--n) center / contain no-repeat;
+  mask: var(--n) center / contain no-repeat;
 }

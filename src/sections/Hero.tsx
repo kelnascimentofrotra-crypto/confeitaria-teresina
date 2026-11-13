@@ -1,6 +1,7 @@
 import { m } from 'framer-motion'
 import portrait from '../assets/img/hero-portrait.webp'
 import portrait2x from '../assets/img/hero-portrait-2x.webp'
+import portraitMid from '../assets/img/hero-mid.webp'
 import { CtaButton } from '../components/CtaButton'
 import { QuoteButton } from '../components/QuoteButton'
 import { RevealLines } from '../components/Reveal'
@@ -24,13 +25,14 @@ export function Hero() {
         />
         <m.div
           className="hero-figure-inner"
-          initial={{ opacity: 0, y: 40, scale: 1.04 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
+          // a foto já nasce visível (só se move): não depende da animação para aparecer nem atrasa o LCP
+          initial={{ y: 40, scale: 1.04 }}
+          animate={{ y: 0, scale: 1 }}
           transition={{ duration: 1.3, delay: 0.1, ease }}
         >
           <Img
             src={portrait}
-            srcSet={`${portrait} 448w, ${portrait2x} 896w`}
+            srcSet={`${portrait} 448w, ${portraitMid} 640w, ${portrait2x} 896w`}
             sizes="(min-width: 768px) 70vh, 44vh"
             width={448}
             height={573}

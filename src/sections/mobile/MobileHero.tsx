@@ -4,6 +4,7 @@ import type { CSSProperties } from 'react'
 import portrait from '../../assets/img/hero-portrait.webp'
 import portrait2x from '../../assets/img/hero-portrait-2x.webp'
 import markLg from '../../assets/img/logo-mark-lg.webp'
+import portraitMid from '../../assets/img/hero-mid.webp'
 import { Img } from '../../components/Img'
 import { Reveal, RevealLines } from '../../components/Reveal'
 import { useI18n } from '../../i18n'
@@ -39,7 +40,13 @@ export function MobileHero() {
             animate={{ opacity: 0.85, scale: 1 }}
             transition={{ duration: 1.4, ease }}
           >
-            <span className="hero-n-glow block aspect-[268/243] w-full bg-contain bg-no-repeat" style={{ backgroundImage: `url(${markLg})` }} />
+            {/* "N" oficial (imagem pequena) + brilho azul em CSS com a mesma silhueta, desenhado uma única vez */}
+            <span className="relative block aspect-[247/228] w-full" style={{ '--n': `url(${markLg})` } as CSSProperties}>
+              <span className="hero-n-halo">
+                <span />
+              </span>
+              <span className="absolute inset-0 bg-contain bg-center bg-no-repeat" style={{ backgroundImage: 'var(--n)' }} />
+            </span>
           </m.div>
           <m.div
             aria-hidden="true"
@@ -57,7 +64,7 @@ export function MobileHero() {
           >
             <Img
               src={portrait}
-              srcSet={`${portrait} 448w, ${portrait2x} 896w`}
+              srcSet={`${portrait} 448w, ${portraitMid} 640w, ${portrait2x} 896w`}
               sizes="(max-width: 480px) 76vw, 340px"
               width={448}
               height={573}

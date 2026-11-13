@@ -25,11 +25,13 @@ function seo(siteUrl: string): Plugin {
         const find = (re: RegExp) => Object.keys(ctx.bundle!).find((f) => re.test(f))
         const cut = find(/hero-portrait-(?!2x)[\w-]+\.webp$/)
         const cut2x = find(/hero-portrait-2x-[\w-]+\.webp$/)
+        const mid = find(/hero-mid-[\w-]+\.webp$/)
         const tags: string[] = []
-        if (cut && cut2x) {
+        if (cut && cut2x && mid) {
+          const set = `${base}${cut} 448w, ${base}${mid} 640w, ${base}${cut2x} 896w`
           tags.push(
-            `<link rel="preload" as="image" fetchpriority="high" media="(max-width: 767px)" href="${base}${cut}" imagesrcset="${base}${cut} 448w, ${base}${cut2x} 896w" imagesizes="(max-width: 480px) 76vw, 340px" />`,
-            `<link rel="preload" as="image" fetchpriority="high" media="(min-width: 768px)" href="${base}${cut}" imagesrcset="${base}${cut} 448w, ${base}${cut2x} 896w" imagesizes="70vh" />`,
+            `<link rel="preload" as="image" fetchpriority="high" media="(max-width: 767px)" href="${base}${cut}" imagesrcset="${set}" imagesizes="(max-width: 480px) 76vw, 340px" />`,
+            `<link rel="preload" as="image" fetchpriority="high" media="(min-width: 768px)" href="${base}${cut}" imagesrcset="${set}" imagesizes="70vh" />`,
           )
         }
         html = html.replace('<link rel="canonical"', `${tags.join('\n    ')}\n    <link rel="canonical"`)
