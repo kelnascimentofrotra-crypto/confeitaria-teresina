@@ -9,6 +9,7 @@ import { SectionBadge } from '../components/SectionBadge'
 import { projects, type Project } from '../data/projects'
 import { useI18n } from '../i18n'
 import { quoteHref } from '../lib/contact'
+import { Img } from '../components/Img'
 
 function Clouds() {
   return (
@@ -76,7 +77,7 @@ function ProjectCard({ project, delay }: { project: Project; delay: number }) {
   return (
     <Reveal delay={delay} amount={0.2}>
       <article className="card-frost grid h-full items-center gap-5 rounded-[28px] p-3 sm:grid-cols-[1.2fr_1fr] sm:p-3.5">
-        <img
+        <Img
           src={project.image}
           alt={`${project.name} — ${project.category[lang]}`}
           loading="lazy"

@@ -9,13 +9,15 @@ type Props = HTMLMotionProps<'div'> & {
   y?: number
   x?: number
   amount?: number
+  /** false = só movimento, sem opacidade (use em imagens: nunca ficam invisíveis se a animação não rodar) */
+  fade?: boolean
 }
 
 /** Revela o conteúdo suavemente ao entrar na tela (uma única vez). */
-export function Reveal({ children, delay = 0, y = 28, x = 0, amount = 0.25, ...rest }: Props) {
+export function Reveal({ children, delay = 0, y = 28, x = 0, amount = 0.25, fade = true, ...rest }: Props) {
   return (
     <m.div
-      initial={{ opacity: 0, y, x }}
+      initial={{ opacity: fade ? 0 : 1, y, x }}
       whileInView={{ opacity: 1, y: 0, x: 0 }}
       viewport={{ once: true, amount }}
       transition={{ duration: 0.7, delay, ease }}

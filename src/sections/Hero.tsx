@@ -5,6 +5,7 @@ import { CtaButton } from '../components/CtaButton'
 import { QuoteButton } from '../components/QuoteButton'
 import { RevealLines } from '../components/Reveal'
 import { useI18n } from '../i18n'
+import { Img } from '../components/Img'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -27,7 +28,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 1.3, delay: 0.1, ease }}
         >
-          <img
+          <Img
             src={portrait}
             srcSet={`${portrait} 448w, ${portrait2x} 896w`}
             sizes="(min-width: 768px) 70vh, 44vh"

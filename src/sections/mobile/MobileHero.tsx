@@ -6,6 +6,8 @@ import { CtaButton } from '../../components/CtaButton'
 import { QuoteButton } from '../../components/QuoteButton'
 import { Reveal, RevealLines } from '../../components/Reveal'
 import { useI18n } from '../../i18n'
+import { Img } from '../../components/Img'
+import type { CSSProperties } from 'react'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -14,6 +16,8 @@ export function MobileHero() {
   const { t } = useI18n()
   const h = t.mobile.hero
   const z = t.mobile.zero
+  // Linha mais longa do título → tamanho que cabe sem quebras acidentais
+  const chars = Math.max(...[...h.lines, ...h.highlight].map((l) => l.length))
 
   return (
     <section
@@ -32,7 +36,11 @@ export function MobileHero() {
           <span className="h-2 w-2 rounded-full bg-cyan shadow-[0_0_10px_#11c8ff]" aria-hidden="true" />
           {h.eyebrow}
         </m.p>
-        <h1 id="hero-title" className="m-title mt-4 text-[clamp(1.85rem,8.6vw,2.4rem)] uppercase">
+        <h1
+          id="hero-title"
+          className="m-title fit-lines mt-4 uppercase"
+          style={{ '--chars': chars, '--fit-max': '2.45rem' } as CSSProperties}
+        >
           <RevealLines
             animateOnMount
             delay={0.35}
@@ -48,7 +56,7 @@ export function MobileHero() {
           {h.lead}
         </m.p>
         <m.div
-          className="mt-7 flex flex-wrap gap-2.5"
+          className="m-hero-ctas mt-7 flex flex-wrap gap-2.5"
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.9, ease }}
@@ -61,18 +69,26 @@ export function MobileHero() {
       </div>
 
       {/* Foto natural em moldura iluminada */}
-      <div className="relative mt-9 px-3">
-        <div aria-hidden="true" className="halo-pulse absolute inset-x-0 top-[8%] bottom-[20%] rounded-[40px] bg-brand/45 blur-[42px]" />
+      <div className="relative mx-auto mt-9 w-full max-w-[30rem] px-3">
+        <m.div
+          aria-hidden="true"
+          className="halo-pulse absolute inset-x-0 top-[8%] bottom-[20%] rounded-[40px] bg-brand/45 blur-[42px]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.4, ease }}
+        />
+        {/* A foto já começa visível (sem opacidade 0): entra só com um leve movimento,
+            então nunca fica invisível se a animação atrasar e não atrasa o LCP. */}
         <m.div
           className="relative overflow-hidden rounded-t-[30px]"
-          initial={{ opacity: 0, y: 40, scale: 0.97 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 1.1, delay: 0.5, ease }}
+          initial={{ y: 28, scale: 0.975 }}
+          animate={{ y: 0, scale: 1 }}
+          transition={{ duration: 1.1, delay: 0.15, ease }}
         >
-          <img
+          <Img
             src={photo}
             srcSet={`${photo} 448w, ${photo2x} 896w`}
-            sizes="100vw"
+            sizes="(max-width: 480px) 100vw, 480px"
             width={448}
             height={573}
             alt={t.hero.portraitAlt}
@@ -85,7 +101,7 @@ export function MobileHero() {
         </m.div>
         <a
           href="#feito-sob-medida"
-          className="m-eyebrow absolute right-6 bottom-[34%] flex items-center gap-2 text-[0.68rem] text-white/85"
+          className="m-eyebrow absolute right-5 bottom-[25%] flex min-h-11 items-center gap-2 px-1 text-[0.68rem] text-white/85"
         >
           {h.scroll}
           <ArrowDown size={20} className="animate-bounce motion-reduce:animate-none" aria-hidden="true" />
@@ -93,7 +109,7 @@ export function MobileHero() {
       </div>
 
       {/* Tela 2: Projetos do zero */}
-      <div id="feito-sob-medida" className="m-wrap relative -mt-[26%] scroll-mt-24 pb-20">
+      <div id="feito-sob-medida" className="m-wrap relative -mt-[min(26vw,7.8rem)] scroll-mt-24 pb-20">
         <Reveal y={16}>
           <p className="m-eyebrow font-medium text-[#6fa8e6]">{z.eyebrow}</p>
         </Reveal>

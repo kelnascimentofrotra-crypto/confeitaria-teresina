@@ -633,7 +633,22 @@ select.field option {
   font-size: 0.9rem;
 }
 .m-wrap {
+  width: 100%;
+  max-width: 36rem; /* largura de leitura confortável em celulares grandes e tablets pequenos em pé */
+  margin-inline: auto;
   padding-inline: clamp(1.25rem, 6vw, 1.75rem);
+}
+/* Largura útil do texto mobile, usada para dimensionar títulos com quebras planejadas */
+:root {
+  --m-text: calc(min(100vw, 36rem) - 2 * clamp(1.25rem, 6vw, 1.75rem));
+}
+/* Título que sempre cabe na largura com as quebras de linha definidas no texto.
+   --chars = caracteres da linha mais longa; ~0.6em por caractere em caixa alta 800. */
+.fit-lines {
+  font-size: min(var(--fit-max, 2.4rem), calc(var(--m-text) / (var(--chars) * 0.6)));
+}
+.fit-lines > span > span > span {
+  white-space: nowrap;
 }
 .m-eyebrow {
   font-size: 0.74rem;
@@ -667,6 +682,21 @@ select.field option {
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 1.04;
+  text-wrap: balance; /* evita palavra sozinha na última linha */
+}
+/* Botões do hero em telas muito estreitas: largura total, alinhados */
+@media (max-width: 359px) {
+  .m-hero-ctas > a {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .m-hero-ctas > a.btn-ghost {
+    justify-content: center;
+  }
+}
+/* Campos de formulário não ficam escondidos atrás do cabeçalho ao receber foco */
+.field {
+  scroll-margin: 96px 0 140px;
 }
 .m-card-light {
   border-radius: 1.6rem;
@@ -713,4 +743,13 @@ select.field option {
 /* Âncoras sem padding próprio não ficam atrás do cabeçalho fixo */
 #formulario {
   scroll-margin-top: 110px;
+}
+
+/* Fallback de imagem: mantém o espaço e a estética se o arquivo falhar */
+.img-fallback {
+  display: block;
+  min-height: 3rem;
+  background:
+    radial-gradient(circle at 50% 40%, rgb(8 122 255 / 0.35), transparent 62%),
+    linear-gradient(160deg, #071329, #030c25);
 }

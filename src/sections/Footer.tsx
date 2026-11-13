@@ -30,7 +30,7 @@ export function Footer() {
             <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2.5 md:grid-cols-1">
               {links.map((id) => (
                 <li key={id}>
-                  <a href={`#${id}`} className="font-semibold text-white/80 transition-colors hover:text-white">
+                  <a href={`#${id}`} className="font-semibold text-white/80 underline-offset-4 transition-colors hover:text-white hover:underline hover:decoration-brand">
                     {t.nav[id]}
                   </a>
                 </li>
@@ -41,24 +41,24 @@ export function Footer() {
           <div className={hasAnyChannel ? undefined : 'max-md:hidden'}>
             <p className="text-xs font-extrabold tracking-[0.2em] text-white/50 uppercase">{t.footer.contactTitle}</p>
             {hasAnyChannel ? (
-              <ul className="mt-4 space-y-3">
+              <ul className="mt-3 space-y-1">
                 {wa && (
                   <li>
-                    <a href={wa} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 font-semibold text-white/80 hover:text-white">
+                    <a href={wa} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-3 font-semibold text-white/80 transition-colors hover:text-white">
                       <WhatsAppIcon className="h-5 w-5 text-cyan" /> {contact.whatsappDisplay}
                     </a>
                   </li>
                 )}
                 {ig && (
                   <li>
-                    <a href={ig} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 font-semibold text-white/80 hover:text-white">
+                    <a href={ig} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-3 font-semibold text-white/80 transition-colors hover:text-white">
                       <Instagram size={20} className="text-cyan" /> @{contact.instagram}
                     </a>
                   </li>
                 )}
                 {mail && (
                   <li>
-                    <a href={mail} className="inline-flex items-center gap-3 font-semibold break-all text-white/80 hover:text-white">
+                    <a href={mail} className="inline-flex min-h-11 items-center gap-3 font-semibold break-all text-white/80 transition-colors hover:text-white">
                       <Mail size={20} className="text-cyan" /> {contact.email}
                     </a>
                   </li>

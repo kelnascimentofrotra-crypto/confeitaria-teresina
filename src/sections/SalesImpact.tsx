@@ -1,7 +1,9 @@
 import wallet from '../assets/img/wallet.webp'
+import wallet480 from '../assets/img/wallet-480.webp'
 import { QuoteButton } from '../components/QuoteButton'
 import { Reveal, RevealLines } from '../components/Reveal'
 import { useI18n } from '../i18n'
+import { Img } from '../components/Img'
 
 function SideNote({ text, align = 'left' }: { text: string; align?: 'left' | 'right' }) {
   return (
@@ -51,14 +53,16 @@ export function SalesImpact() {
             <SideNote text={s.left} />
           </Reveal>
 
-          <Reveal y={40} amount={0.15} className="order-1 lg:order-2">
+          <Reveal y={40} amount={0.15} fade={false} className="order-1 lg:order-2">
             <div className="relative mx-auto max-w-[640px]">
               <div
                 aria-hidden="true"
                 className="absolute inset-x-[12%] top-[20%] bottom-[8%] rounded-full bg-brand/45 blur-[70px]"
               />
-              <img
+              <Img
                 src={wallet}
+                srcSet={`${wallet480} 480w, ${wallet} 814w`}
+                sizes="(min-width: 1024px) 40vw, (min-width: 576px) 36rem, 112vw"
                 alt={s.imageAlt}
                 width={814}
                 height={623}

@@ -1,12 +1,16 @@
 import wallet from '../../assets/img/wallet.webp'
+import wallet480 from '../../assets/img/wallet-480.webp'
 import { QuoteButton } from '../../components/QuoteButton'
 import { Reveal, RevealLines } from '../../components/Reveal'
+import type { CSSProperties } from 'react'
 import { useI18n } from '../../i18n'
+import { Img } from '../../components/Img'
 
 export function MobileSales() {
   const { t } = useI18n()
   const s = t.sales
   const ms = t.mobile.sales
+  const chars = Math.max(...[...s.titleLines, s.titleHighlight].map((l) => l.length))
 
   return (
     <section
@@ -18,14 +22,20 @@ export function MobileSales() {
         <Reveal y={10}>
           <p className="m-eyebrow text-[#5cb2ff]">{ms.eyebrow}</p>
         </Reveal>
-        <h2 id="m-sales-title" className="m-title mt-4 text-[clamp(1.9rem,9.2vw,2.45rem)] uppercase">
+        <h2
+          id="m-sales-title"
+          className="m-title fit-lines mt-4 uppercase"
+          style={{ '--chars': chars, '--fit-max': '2.45rem' } as CSSProperties}
+        >
           <RevealLines lines={[...s.titleLines, <span className="text-[#2b9bff]">{s.titleHighlight}</span>]} />
         </h2>
       </div>
 
-      <Reveal y={40} amount={0.2} className="relative -mx-[6%] mt-6">
-        <img
+      <Reveal y={40} amount={0.2} fade={false} className="relative mx-auto mt-6 w-[112%] max-w-[36rem] -translate-x-[5.4%] min-[520px]:w-full min-[520px]:translate-x-0">
+        <Img
           src={wallet}
+          srcSet={`${wallet480} 480w, ${wallet} 814w`}
+          sizes="(min-width: 1024px) 40vw, (min-width: 576px) 36rem, 112vw"
           alt={s.imageAlt}
           width={814}
           height={623}

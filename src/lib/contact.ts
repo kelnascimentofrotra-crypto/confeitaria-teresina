@@ -1,6 +1,12 @@
 import { site } from '../config/site'
 
 const digits = site.contact.whatsapp.replace(/\D/g, '')
+
+/** 5598984201544 → +55 (98) 98420-1544 */
+function formatPhone(d: string): string {
+  const m = d.match(/^55(\d{2})(\d{4,5})(\d{4})$/)
+  return m ? `+55 (${m[1]}) ${m[2]}-${m[3]}` : d ? `+${d}` : ''
+}
 const email = site.contact.email.trim()
 const instagram = site.contact.instagram.replace(/^@/, '').trim()
 
@@ -10,7 +16,7 @@ export const contact = {
   hasInstagram: instagram.length > 0,
   email,
   instagram,
-  whatsappDisplay: digits ? `+${digits}` : '',
+  whatsappDisplay: formatPhone(digits),
 }
 
 export const hasAnyChannel = contact.hasWhatsapp || contact.hasEmail || contact.hasInstagram

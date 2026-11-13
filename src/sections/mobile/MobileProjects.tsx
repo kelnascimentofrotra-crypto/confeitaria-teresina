@@ -7,6 +7,7 @@ import { Reveal, RevealLines } from '../../components/Reveal'
 import { projects, type Project } from '../../data/projects'
 import { useI18n } from '../../i18n'
 import { isExternal, quoteHref } from '../../lib/contact'
+import { Img } from '../../components/Img'
 
 /** Artes das prévias (em código, sem prints de terceiros), como nas telas 5 e 6. */
 const arts: Array<{ bg: string; art: ReactNode }> = [
@@ -94,7 +95,7 @@ function RealCard({ project }: { project: Project }) {
   const { t, lang } = useI18n()
   return (
     <CardShell delay={0.05}>
-      <img
+      <Img
         src={project.image}
         alt={`${project.name} — ${project.category[lang]}`}
         loading="lazy"
@@ -142,8 +143,8 @@ export function MobileProjects() {
       {/* Céu com nuvens no topo, como na referência */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[420px]">
         <div className="absolute inset-x-0 top-0 h-[260px] bg-[linear-gradient(180deg,#02040b_0%,#1f56b4_22%,#9cc2f0_55%,#f4f8ff_100%)]" />
-        <img src={cloudLeft} alt="" width={300} height={297} loading="lazy" className="cloud -left-[25%] -top-4 w-[90%] opacity-90" />
-        <img src={cloudRight} alt="" width={292} height={287} loading="lazy" className="cloud -right-[25%] -top-8 w-[90%] opacity-90" />
+        <Img src={cloudLeft} alt="" width={300} height={297} loading="lazy" className="cloud -left-[25%] -top-4 w-[min(90%,26rem)] opacity-90" />
+        <Img src={cloudRight} alt="" width={292} height={287} loading="lazy" className="cloud -right-[25%] -top-8 w-[min(90%,26rem)] opacity-90" />
       </div>
 
       <div className="m-wrap relative pt-10">

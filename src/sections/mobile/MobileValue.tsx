@@ -7,7 +7,7 @@ export function MobileValue() {
   const v = t.mobile.value
 
   return (
-    <section id="percepcao" data-nav="inicio" aria-labelledby="m-value-title" className="relative overflow-hidden bg-snow py-16 text-[#0b1630]">
+    <section id="percepcao" data-nav="inicio" aria-labelledby="m-value-title" className="glow-band relative my-3 overflow-hidden rounded-[2rem] py-16 text-[#0b1630]">
       {/* Arco azul decorativo (canto inferior direito) */}
       <div
         aria-hidden="true"

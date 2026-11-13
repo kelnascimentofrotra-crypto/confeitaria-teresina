@@ -12,7 +12,7 @@ export function MobileSolutions() {
   const ms = t.mobile.solutions
 
   return (
-    <section id="solucoes" data-nav="diferenciais" aria-labelledby="m-solutions-title" className="bg-[linear-gradient(180deg,#eef4ff_0%,#f4f8ff_100%)] py-12 text-[#0b1630]">
+    <section id="solucoes" data-nav="diferenciais" aria-labelledby="m-solutions-title" className="glow-band relative my-3 rounded-[2rem] py-12 text-[#0b1630]">
       <div className="m-wrap">
         <Reveal amount={0.15}>
           <div className="relative min-h-[25rem] overflow-hidden rounded-[1.8rem] bg-white shadow-[0_30px_60px_-30px_rgba(8,40,110,0.45)]">
@@ -27,9 +27,9 @@ export function MobileSolutions() {
             >
               <div className="m-slats absolute inset-y-0 right-0 left-[22%] opacity-80" />
             </m.div>
-            <div className="relative p-8 pt-10 pr-[16%]">
+            <div className="relative p-6 pt-9 pr-[12%] min-[380px]:p-8 min-[380px]:pt-10 min-[380px]:pr-[16%]">
               <p className="m-eyebrow font-medium text-[#5b6884]">{ms.eyebrow}</p>
-              <h2 id="m-solutions-title" className="m-title mt-5 text-[clamp(1.9rem,9vw,2.4rem)]">
+              <h2 id="m-solutions-title" className="m-title mt-5 text-[clamp(1.55rem,8.2vw,2.4rem)]">
                 <RevealLines lines={[ms.title, <span className="text-brand">{ms.highlight}</span>]} />
               </h2>
               <p className="mt-5 max-w-[15rem] text-[0.98rem] leading-relaxed text-[#5b6884]">{ms.subtitle}</p>

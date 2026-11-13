@@ -9,7 +9,7 @@ export const site = {
   name: 'NEXAWEB',
   contact: {
     /** Somente dígitos, com DDI e DDD. Ex.: '5586900000000' */
-    whatsapp: '',
+    whatsapp: '5598984201544',
     /** Ex.: 'contato@seudominio.com.br' */
     email: '',
     /** Usuário do Instagram, sem @. Ex.: 'nexaweb' */

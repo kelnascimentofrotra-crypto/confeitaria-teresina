@@ -16,7 +16,7 @@ export function LanguageButton({ className }: { className?: string }) {
     <button
       type="button"
       onClick={toggle}
-      aria-label={t.lang.toggle}
+      aria-label={`${lang === 'pt' ? 'PT' : 'EN'} · ${t.lang.toggle}`}
       className={cn(
         'group inline-flex h-11 items-center gap-1.5 rounded-full px-2.5 text-white/90 transition-colors hover:bg-white/8 hover:text-white',
         className,
@@ -70,7 +70,7 @@ export function Header() {
                           aria-current={isActive ? 'true' : undefined}
                           className={cn(
                             'relative block rounded-full px-5 py-2.5 text-[0.95rem] font-bold transition-colors duration-300',
-                            isActive ? 'text-brand' : 'text-white/90 hover:text-white',
+                            isActive ? 'text-[#0560d4]' : 'text-white/90 hover:text-white',
                           )}
                         >
                           {isActive && (

@@ -67,7 +67,7 @@ export function Solutions() {
           </div>
         </Reveal>
 
-        <ul className="mt-6 grid gap-5 md:grid-cols-3 lg:mt-8 lg:gap-7">
+        <ul className="mt-6 grid gap-5 lg:mt-8 lg:grid-cols-3 lg:gap-7">
           {s.benefits.map((b, i) => {
             const Icon = benefitIcons[i]
             return (

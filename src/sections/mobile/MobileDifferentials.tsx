@@ -2,6 +2,7 @@ import { Sparkles } from 'lucide-react'
 import earthCard from '../../assets/img/earth-card.webp'
 import { Reveal, RevealLines } from '../../components/Reveal'
 import { useI18n } from '../../i18n'
+import { Img } from '../../components/Img'
 
 export function MobileDifferentials() {
   const { t } = useI18n()
@@ -36,7 +37,7 @@ export function MobileDifferentials() {
                     {c.a} {c.b}
                   </h3>
                   <p className="mt-2.5 text-[0.98rem] leading-relaxed text-white/80">{c.text}</p>
-                  <img
+                  <Img
                     src={earthCard}
                     alt=""
                     width={460}

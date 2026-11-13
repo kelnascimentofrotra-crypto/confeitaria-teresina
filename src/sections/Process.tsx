@@ -60,7 +60,7 @@ export function Process() {
   const rowBottom = [5, 4, 3]
 
   return (
-    <section id="entrega" data-nav="entrega" aria-labelledby="process-title" className="process-bg relative overflow-hidden py-24 sm:py-32">
+    <section id="entrega" data-nav="entrega" aria-labelledby="process-title" className="process-bg relative z-10 overflow-hidden rounded-b-[2.5rem] py-24 shadow-[0_20px_50px_-12px_rgba(8,122,255,0.55)] sm:py-32">
       {/* Painéis de vidro decorativos (referência: canto superior direito) */}
       <div aria-hidden="true" className="pointer-events-none absolute -top-10 right-[-8%] hidden h-[520px] w-[440px] lg:block">
         <div className="absolute top-16 right-24 h-[380px] w-[240px] rotate-[8deg] rounded-[36px] border border-white/80 bg-linear-to-b from-white/70 to-[#cfe0fb]/40 shadow-[0_30px_60px_-30px_rgba(8,80,200,0.35)] backdrop-blur-md" />

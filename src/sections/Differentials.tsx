@@ -4,6 +4,7 @@ import earthHorizon from '../assets/img/earth-horizon.webp'
 import { Reveal, RevealLines } from '../components/Reveal'
 import { SectionBadge } from '../components/SectionBadge'
 import { useI18n } from '../i18n'
+import { Img } from '../components/Img'
 
 const cardIcons: LucideIcon[] = [CodeXml, Target, ChartNoAxesColumnIncreasing]
 const extraIcons: LucideIcon[] = [Palette, MonitorSmartphone, MousePointerClick, Target]
@@ -44,7 +45,7 @@ export function Differentials() {
                     <p className="mt-3 text-[0.98rem] leading-relaxed font-medium text-white/80">{c.text}</p>
                   </div>
                   <div className="relative mt-6 h-36 sm:h-40">
-                    <img
+                    <Img
                       src={earthCard}
                       alt=""
                       width={460}
@@ -85,7 +86,7 @@ export function Differentials() {
       {/* Horizonte da Terra na base da seção */}
       <div aria-hidden="true" className="relative mt-12 sm:mt-16">
         <div className="absolute inset-x-0 -top-24 h-40 bg-[radial-gradient(60%_100%_at_50%_100%,rgba(8,122,255,0.35),transparent_70%)]" />
-        <img
+        <Img
           src={earthHorizon}
           alt=""
           width={1672}
