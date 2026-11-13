@@ -1,0 +1,264 @@
+import type { Dictionary } from './pt'
+
+export const en: Dictionary = {
+  meta: {
+    title: 'NEXAWEB — Professional websites built from scratch',
+    description:
+      'NEXAWEB builds corporate websites, landing pages and custom systems from scratch to strengthen your brand and make it easier for new clients to reach you.',
+  },
+  a11y: {
+    skip: 'Skip to content',
+    home: 'NEXAWEB — back to top',
+    newTab: '(opens in a new tab)',
+  },
+  nav: {
+    label: 'Main navigation',
+    inicio: 'Home',
+    projetos: 'Projects',
+    entrega: 'Process',
+    diferenciais: 'Why me',
+    solucoes: 'Solutions',
+    faq: 'FAQ',
+    contato: 'Contact',
+  },
+  menu: {
+    open: 'Open menu',
+    close: 'Close menu',
+    title: 'Menu',
+    language: 'Language',
+    talk: 'Shall we talk about your project?',
+  },
+  lang: {
+    toggle: 'Switch language to Portuguese',
+    pt: 'Português',
+    en: 'English',
+  },
+  cta: {
+    quote: 'Request a quote',
+    quoteMessage: 'Hi! I found NEXAWEB through the website and would like to request a quote.',
+  },
+  hero: {
+    titleLines: ['Give your brand', 'a website that truly', 'sells for you'],
+    lead: 'From the first click to the final decision, I build websites that elevate your brand, convey professionalism and help your business grow.',
+    secondary: 'Projects',
+    sideTitle: ['Built from', 'scratch'],
+    sideText:
+      'No ready-made templates. Every project starts from the essence of your brand, designed to create a presence that is impossible to mistake.',
+    portraitAlt: 'Portrait of the NEXAWEB founder, who develops every project',
+  },
+  value: {
+    eyebrow: 'Think about it',
+    titleLines: ['Perceived value', 'is completely'],
+    titleLast: 'tied',
+    titleHighlight: 'to visuals.',
+    body: 'You may have a great service, a great product and the potential to sell more. But if your website does not build trust or clearly explain why people should choose your company, good opportunities can slip by unnoticed.',
+    mission:
+      'My mission is to make your digital presence reflect the real quality of your work, spark interest and make it easy for potential clients to reach you.',
+  },
+  sales: {
+    titleLines: ['A new website can', 'help your company'],
+    titleHighlight: 'sell much more',
+    left: 'Your business conveys more credibility from the very first visit.',
+    right: 'Fewer lost visitors. More people interested in your service.',
+    imageAlt: 'Leather wallet holding a one-hundred real banknote, on a stone pedestal lit in blue',
+  },
+  projects: {
+    badge: 'Featured projects',
+    titleA: 'Every project starts with',
+    titleHighlight: 'its own strategy.',
+    realTitleA: 'See some of our',
+    realTitleHighlight: 'featured projects',
+    subtitle:
+      'Every project begins with strategy: elevating a brand, capturing attention and helping visitors find what they are looking for.',
+    illustration: 'Illustration',
+    want: 'I want a project like this',
+    view: 'View project',
+    inProgress: 'Project in progress',
+    formatMessage: 'Hi! I found NEXAWEB through the website and I am interested in a {format} project.',
+    formats: [
+      {
+        id: 'institucional',
+        title: 'Corporate website',
+        tag: 'Presence and authority',
+        text: 'Presents your company clearly, organizes your services and builds trust with first-time visitors.',
+      },
+      {
+        id: 'landing',
+        title: 'Landing page',
+        tag: 'Lead capture and conversion',
+        text: 'A page with a single goal: guiding visitors to get in touch, sign up or buy.',
+      },
+      {
+        id: 'sistema',
+        title: 'Custom system',
+        tag: 'Management and organization',
+        text: 'Dashboards and admin tools designed around your daily operations, with no forced workarounds.',
+      },
+      {
+        id: 'plataforma',
+        title: 'Digital platform',
+        tag: 'Product and scale',
+        text: 'Catalogs, client areas and platforms that bring content, products and services together.',
+      },
+    ],
+  },
+  process: {
+    badge: 'Our process',
+    title: 'From first contact to delivery:',
+    highlight: 'Six steps.',
+    subtitle: 'A simple, transparent and efficient process to get your project off the ground.',
+    steps: [
+      { title: 'Briefing', text: 'I learn about your business, your goals and what the website needs to deliver.' },
+      { title: 'Immersion', text: 'I organize the information and define the direction of the project.' },
+      { title: 'Website in development', text: 'I turn the strategy into structure, design and features.' },
+      { title: 'Presentation', text: 'I present the project and we align the adjustments.' },
+      { title: 'Optimization', text: 'I test the experience, the performance and the final details.' },
+      { title: 'Delivery', text: 'I put the website live, reviewed and ready to welcome visitors.' },
+    ],
+  },
+  differentials: {
+    badge: 'Why me',
+    title: 'Why should you choose',
+    highlight: 'to work with me?',
+    cards: [
+      {
+        a: 'Your website is built',
+        b: 'from scratch',
+        text: 'Your project is designed for your brand and your business, avoiding generic templates.',
+      },
+      {
+        a: 'A website that is',
+        b: 'only yours',
+        text: 'Every detail starts from the identity and message your company wants to convey.',
+      },
+      {
+        a: 'Strategy',
+        b: 'before design',
+        text: 'I study your market and audience to design a clear, relevant experience.',
+      },
+    ],
+    extras: [
+      { title: 'Professional design', text: 'Visuals that match the level of your work.' },
+      { title: 'Truly responsive', text: 'Comfortable reading on phones, tablets and desktops.' },
+      { title: 'User experience', text: 'Clear paths so visitors find what they need.' },
+      { title: 'Focused on your goal', text: 'Every section exists to support the client’s decision.' },
+    ],
+  },
+  solutions: {
+    titleLines: ['Solutions that', 'drive your'],
+    highlight: 'business',
+    subtitle: 'Technology, strategy and design for a digital presence that makes a great first impression.',
+    benefits: [
+      {
+        title: 'More sales opportunities',
+        text: 'Websites designed to turn visits into conversations with potential clients.',
+      },
+      { title: 'Online presence', text: 'A consistent, professional and memorable digital identity.' },
+      { title: 'Credibility', text: 'An experience that conveys trust and organization.' },
+    ],
+    servicesEyebrow: 'Services',
+    servicesTitle: 'What I build',
+    services: [
+      { title: 'Corporate websites', text: 'Your company presented clearly, from positioning to contact channels.' },
+      { title: 'Landing pages', text: 'Pages focused on a single action, ideal for campaigns, launches and lead capture.' },
+      {
+        title: 'Business websites',
+        text: 'A complete structure for businesses that need to present services, team and strengths.',
+      },
+      { title: 'Custom systems', text: 'Web tools built from the real processes of your operation.' },
+      { title: 'Digital platforms', text: 'Online environments for products, content or exclusive client areas.' },
+      { title: 'Admin solutions', text: 'Dashboards to organize records, orders and information in one place.' },
+      {
+        title: 'Digital presence optimization',
+        text: 'Reviews of existing websites: speed, clarity, responsiveness and structure for Google.',
+      },
+    ],
+  },
+  mission: {
+    titleLines: ['My goal is to increase', 'your results.'],
+    text: 'Every company has a different goal. That is why I seek to understand what needs to happen for an investment in a new website to have purpose and create value for the business.',
+    imageAlt: 'Hand holding a glowing blue glass tile with the NEXAWEB logo',
+  },
+  faq: {
+    title: 'Frequently Asked Questions',
+    items: [
+      {
+        q: 'How long until my website is ready?',
+        a: 'The timeline depends on the scope, the number of pages and the complexity of the features. Before we start, we define a schedule for your project.',
+      },
+      {
+        q: 'How does payment work?',
+        a: 'Payment can be made via Pix. Terms and milestones are agreed before the project begins, clearly and in writing.',
+      },
+      {
+        q: 'Do you build any type of website?',
+        a: 'I work on different web projects, such as corporate websites, presentation pages and lead capture pages. Specific needs are evaluated during the briefing.',
+      },
+      {
+        q: 'Do I need all the content ready to start?',
+        a: 'Not necessarily. We can organize what already exists and identify together the materials that still need to be prepared.',
+      },
+      {
+        q: 'How does responsiveness work?',
+        a: 'The layout adapts to different screen sizes, including phones, tablets and computers, with attention to navigation and readability.',
+      },
+      {
+        q: 'How does support work after delivery?',
+        a: 'Support and maintenance terms are agreed in the proposal, according to the needs of the project.',
+      },
+    ],
+  },
+  contact: {
+    eyebrow: 'Contact',
+    title: 'Ready to take the next step for your brand?',
+    text: 'Tell me what you want to build. Let’s talk about the best direction for your website.',
+    talk: 'Talk about my project',
+    channelsTitle: 'Direct channels',
+    whatsapp: 'WhatsApp',
+    instagram: 'Instagram',
+    email: 'Email',
+    form: {
+      title: 'Tell me about your project',
+      name: 'Name',
+      namePh: 'What should I call you?',
+      reply: 'WhatsApp or email for reply',
+      replyPh: 'Your best contact',
+      type: 'Project type',
+      typePh: 'Select an option',
+      types: [
+        'Corporate website',
+        'Landing page',
+        'Business website',
+        'Custom system',
+        'Digital platform',
+        'Existing website optimization',
+        'Other',
+      ],
+      message: 'Message',
+      messagePh: 'Tell me a little about your business and what you need.',
+      consent: 'I authorize the use of this data only to reply to my message.',
+      submit: 'Send message',
+      errors: {
+        name: 'Please enter your name.',
+        reply: 'Enter a WhatsApp number (with area code) or a valid email.',
+        type: 'Please select a project type.',
+        message: 'Write a message with at least 10 characters.',
+        consent: 'You need to authorize the use of your data to send.',
+      },
+      sentWhatsapp: 'We opened WhatsApp with your message ready. Just tap send.',
+      sentEmail: 'We opened your email app with the message ready. Just hit send.',
+      unavailable:
+        'Our contact channels are still being set up. Your message was not sent — please try again soon.',
+      subject: 'New project via the NEXAWEB website',
+      composed: 'Hi! I found NEXAWEB through the website.',
+    },
+  },
+  footer: {
+    tagline: 'Websites built with strategy, identity and attention to detail.',
+    navTitle: 'Navigation',
+    contactTitle: 'Contact',
+    contactFallback: 'Use the form in the contact section.',
+    rights: 'All rights reserved.',
+    backToTop: 'Back to top',
+  },
+}
