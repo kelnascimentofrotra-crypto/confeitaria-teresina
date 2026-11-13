@@ -2,9 +2,13 @@ import { defineConfig, loadEnv, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
+/** Domínio público do site. Pode ser trocado no build com a variável SITE_URL (ex.: domínio próprio). */
+const DEFAULT_SITE_URL = 'https://nexawebagency.vercel.app'
+
 /**
- * Injeta as tags que dependem do domínio final (canonical, og:url, og:image absoluta)
- * e gera robots.txt / sitemap.xml. Sem SITE_URL, nada que dependa de domínio é inventado.
+ * SEO no HTML inicial (lido pelos robôs de WhatsApp, Facebook, LinkedIn etc., que não executam JavaScript):
+ * troca __SITE_URL__ pela URL absoluta em todas as metatags, pré-carrega a foto do hero
+ * e gera robots.txt e sitemap.xml.
  */
 function seo(siteUrl: string): Plugin {
   const url = siteUrl.replace(/\/+$/, '')
@@ -22,36 +26,23 @@ function seo(siteUrl: string): Plugin {
         const cut = find(/hero-portrait-(?!2x)[\w-]+\.webp$/)
         const cut2x = find(/hero-portrait-2x-[\w-]+\.webp$/)
         const tags: string[] = []
-        if (cut && cut2x)
+        if (cut && cut2x) {
           tags.push(
             `<link rel="preload" as="image" fetchpriority="high" media="(max-width: 767px)" href="${base}${cut}" imagesrcset="${base}${cut} 448w, ${base}${cut2x} 896w" imagesizes="(max-width: 480px) 76vw, 340px" />`,
-          )
-        if (cut && cut2x)
-          tags.push(
             `<link rel="preload" as="image" fetchpriority="high" media="(min-width: 768px)" href="${base}${cut}" imagesrcset="${base}${cut} 448w, ${base}${cut2x} 896w" imagesizes="70vh" />`,
           )
-        html = html.replace('<!-- seo:domain -->', `${tags.join('\n    ')}\n    <!-- seo:domain -->`)
+        }
+        html = html.replace('<link rel="canonical"', `${tags.join('\n    ')}\n    <link rel="canonical"`)
       }
-      if (!url) return html
-      return html
-        .replace('content="/og-image.jpg"', `content="${url}/og-image.jpg"`)
-        .replace(
-          '<!-- seo:domain -->',
-          `<link rel="canonical" href="${url}/" />\n    <meta property="og:url" content="${url}/" />`,
-        )
+      return html.replaceAll('__SITE_URL__', url)
     },
     generateBundle() {
-      const robots = ['User-agent: *', 'Allow: /', url ? `Sitemap: ${url}/sitemap.xml` : '']
-        .filter(Boolean)
-        .join('\n')
-      this.emitFile({ type: 'asset', fileName: 'robots.txt', source: robots + '\n' })
-      if (url) {
-        this.emitFile({
-          type: 'asset',
-          fileName: 'sitemap.xml',
-          source: `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>${url}/</loc></url>\n</urlset>\n`,
-        })
-      }
+      this.emitFile({ type: 'asset', fileName: 'robots.txt', source: `User-agent: *\nAllow: /\nSitemap: ${url}/sitemap.xml\n` })
+      this.emitFile({
+        type: 'asset',
+        fileName: 'sitemap.xml',
+        source: `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>${url}/</loc></url>\n</urlset>\n`,
+      })
     },
   }
 }
@@ -62,7 +53,7 @@ const singleFile = process.env.SINGLEFILE === '1'
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   return {
-    plugins: [react(), tailwindcss(), seo(env.SITE_URL ?? '')],
+    plugins: [react(), tailwindcss(), seo(env.SITE_URL || DEFAULT_SITE_URL)],
     build: {
       target: 'es2020',
       cssCodeSplit: false,

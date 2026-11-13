@@ -20,7 +20,7 @@ npm run lint       # ESLint
 | --- | --- |
 | WhatsApp, e-mail e Instagram reais | `src/config/site.ts` |
 | Projetos reais (print, nome, ano, link) | `src/data/projects.ts` |
-| Domínio final (canonical, og:url, sitemap) | variável `SITE_URL` no build (veja `.env.example`) |
+| Domínio (Open Graph, canonical, sitemap) | padrão `https://nexawebagency.vercel.app`; troque com a variável `SITE_URL` |
 
 Nada disso foi inventado. Enquanto estiverem vazios:
 - **Solicitar orçamento** leva à seção de contato (com WhatsApp preenchido, abre o WhatsApp com mensagem pronta);
@@ -47,3 +47,10 @@ docs/referencias-aprovadas/   as 9 telas aprovadas usadas como direção de arte
 - **Logo:** extraído do arquivo original sobre preto, sem redesenho.
 - **Carteira, Terra, mão com o logo e nuvens:** recortados das telas aprovadas (`docs/referencias-aprovadas/`).
 - Os prints de Instagram de terceiros do guia **não** foram incluídos no projeto.
+
+## Prévia de compartilhamento (Open Graph)
+
+- Imagem: `public/og-image.jpg` (1200×630), gerada por `scripts/make-og-image.py`.
+- Metatags no `index.html` (HTML inicial, lido pelos robôs sem JavaScript). `__SITE_URL__` é trocado no build
+  pela URL absoluta do site.
+- Depois de publicar, teste em https://developers.facebook.com/tools/debug/ (botão "Scrape Again" limpa o cache).
