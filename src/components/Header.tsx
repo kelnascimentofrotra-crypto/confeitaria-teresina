@@ -5,7 +5,7 @@ import { useActiveSection } from '../hooks/useActiveSection'
 import { useScrolled } from '../hooks/useScrolled'
 import { useI18n } from '../i18n'
 import { cn } from '../lib/cn'
-import { LogoMark } from './Logo'
+import { LogoLockup, LogoMark } from './Logo'
 import { MenuDrawer } from './MenuDrawer'
 
 export const primaryNav = ['inicio', 'projetos', 'entrega', 'diferenciais'] as const
@@ -46,15 +46,18 @@ export function Header() {
         <div
           className={cn(
             'transition-[background-color,box-shadow,border-color,backdrop-filter] duration-500',
+            // No celular o cabeçalho é sempre sólido, como na referência mobile.
+            'max-md:rounded-none max-md:border-b max-md:border-white/10 max-md:bg-[#040916]/95 max-md:backdrop-blur-xl',
             scrolled
-              ? 'rounded-b-[26px] border-b border-white/10 bg-[#030c25]/80 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.7)] backdrop-blur-xl'
+              ? 'md:rounded-b-[26px] border-b border-white/10 bg-[#030c25]/80 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.7)] backdrop-blur-xl'
               : 'border-b border-transparent bg-transparent',
           )}
         >
           <div className="container-wide flex h-[68px] items-center justify-between gap-4 sm:h-[76px]">
             <div className="flex items-center gap-3 lg:gap-6">
               <a href="#inicio" aria-label={t.a11y.home} className="shrink-0 rounded-lg p-1">
-                <LogoMark className="w-8 sm:w-9" />
+                <LogoLockup className="md:hidden" />
+                <LogoMark className="hidden w-9 md:block" />
               </a>
               <nav aria-label={t.nav.label} className="hidden md:block">
                 <ul className="flex items-center gap-1">

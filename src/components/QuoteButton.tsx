@@ -9,15 +9,17 @@ export function QuoteButton({
   className,
   message,
   onClick,
+  arrow,
 }: {
   variant?: 'light' | 'dark'
   className?: string
   message?: string
   onClick?: (e: MouseEvent<HTMLAnchorElement>) => void
+  arrow?: 'right' | 'up-right'
 }) {
   const { t } = useI18n()
   return (
-    <CtaButton href={quoteHref(message ?? t.cta.quoteMessage)} variant={variant} className={className} onClick={onClick}>
+    <CtaButton href={quoteHref(message ?? t.cta.quoteMessage)} variant={variant} className={className} onClick={onClick} arrow={arrow}>
       {t.cta.quote}
     </CtaButton>
   )

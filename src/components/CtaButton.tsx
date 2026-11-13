@@ -1,4 +1,4 @@
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import type { MouseEvent, ReactNode } from 'react'
 import { isExternal } from '../lib/contact'
 import { cn } from '../lib/cn'
@@ -10,15 +10,18 @@ interface Props {
   variant?: 'light' | 'dark' | 'ghost'
   className?: string
   onClick?: (e: MouseEvent<HTMLAnchorElement>) => void
+  arrow?: 'right' | 'up-right'
+  ariaLabel?: string
 }
 
-export function CtaButton({ href, children, variant = 'light', className, onClick }: Props) {
+export function CtaButton({ href, children, variant = 'light', className, onClick, arrow = 'right', ariaLabel }: Props) {
   const { t } = useI18n()
   const external = isExternal(href)
   return (
     <a
       href={href}
       onClick={onClick}
+      aria-label={ariaLabel}
       {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
       className={cn(
         'btn-pill text-[0.95rem] sm:text-base',
@@ -31,7 +34,7 @@ export function CtaButton({ href, children, variant = 'light', className, onClic
       <span>{children}</span>
       {variant !== 'ghost' && (
         <span className="btn-arrow" aria-hidden="true">
-          <ArrowRight size={18} strokeWidth={2.4} />
+          {arrow === 'up-right' ? <ArrowUpRight size={19} strokeWidth={2.6} /> : <ArrowRight size={18} strokeWidth={2.4} />}
         </span>
       )}
       {external && <span className="sr-only">{t.a11y.newTab}</span>}

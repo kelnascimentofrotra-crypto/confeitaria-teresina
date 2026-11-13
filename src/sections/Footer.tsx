@@ -1,7 +1,7 @@
 import { ArrowUp, Instagram, Mail } from 'lucide-react'
 import { WhatsAppIcon } from '../components/BrandIcons'
 import { LanguageButton } from '../components/Header'
-import { Logo } from '../components/Logo'
+import { Logo, LogoLockup } from '../components/Logo'
 import { useI18n } from '../i18n'
 import { contact, hasAnyChannel, instagramUrl, mailtoUrl, whatsappUrl } from '../lib/contact'
 
@@ -15,16 +15,17 @@ export function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="relative border-t border-white/10 bg-ink pt-16 pb-8">
+    <footer className="relative border-t border-white/10 bg-ink pt-12 pb-8 md:pt-16">
       <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-brand/70 to-transparent" />
       <div className="container-x">
         <div className="grid gap-12 md:grid-cols-[1.3fr_1fr_1fr]">
           <div>
-            <Logo className="w-[130px]" alt="NEXAWEB" />
+            <Logo className="hidden w-[130px] md:block" alt="NEXAWEB" />
+            <LogoLockup className="md:hidden [&>img:first-child]:h-10 [&>img:last-child]:h-4" />
             <p className="mt-5 max-w-xs leading-relaxed text-white/70">{t.footer.tagline}</p>
           </div>
 
-          <nav aria-label={t.footer.navTitle}>
+          <nav aria-label={t.footer.navTitle} className="max-md:hidden">
             <p className="text-xs font-extrabold tracking-[0.2em] text-white/50 uppercase">{t.footer.navTitle}</p>
             <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2.5 md:grid-cols-1">
               {links.map((id) => (
@@ -37,7 +38,7 @@ export function Footer() {
             </ul>
           </nav>
 
-          <div>
+          <div className={hasAnyChannel ? undefined : 'max-md:hidden'}>
             <p className="text-xs font-extrabold tracking-[0.2em] text-white/50 uppercase">{t.footer.contactTitle}</p>
             {hasAnyChannel ? (
               <ul className="mt-4 space-y-3">
@@ -73,10 +74,15 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col-reverse items-start justify-between gap-5 border-t border-white/10 pt-6 sm:flex-row sm:items-center">
-          <p className="text-sm text-white/55">
-            © {year} NEXAWEB. {t.footer.rights}
-          </p>
+        <div className="mt-10 flex flex-col-reverse md:mt-14 items-start justify-between gap-5 border-t border-white/10 pt-6 sm:flex-row sm:items-center">
+          <div>
+            <p className="m-eyebrow mb-2 font-medium text-white/60 md:hidden">
+              {t.mobile.contact.footer} • {year}
+            </p>
+            <p className="text-sm text-white/55">
+              © {year} NEXAWEB. {t.footer.rights}
+            </p>
+          </div>
           <div className="flex items-center gap-2">
             <LanguageButton />
             <a
