@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 /** Domínio público do site. Pode ser trocado no build com a variável SITE_URL (ex.: domínio próprio). */
-const DEFAULT_SITE_URL = 'https://nexawebagency.vercel.app'
+const DEFAULT_SITE_URL = 'https://nexawebagency1.vercel.app'
 
 /**
  * SEO no HTML inicial (lido pelos robôs de WhatsApp, Facebook, LinkedIn etc., que não executam JavaScript):

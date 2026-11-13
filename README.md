@@ -20,7 +20,7 @@ npm run lint       # ESLint
 | --- | --- |
 | WhatsApp, e-mail e Instagram reais | `src/config/site.ts` |
 | Projetos reais (print, nome, ano, link) | `src/data/projects.ts` |
-| Domínio (Open Graph, canonical, sitemap) | padrão `https://nexawebagency.vercel.app`; troque com a variável `SITE_URL` |
+| Domínio (Open Graph, canonical, sitemap) | padrão `https://nexawebagency1.vercel.app`; troque com a variável `SITE_URL` |
 
 Nada disso foi inventado. Enquanto estiverem vazios:
 - **Solicitar orçamento** leva à seção de contato (com WhatsApp preenchido, abre o WhatsApp com mensagem pronta);

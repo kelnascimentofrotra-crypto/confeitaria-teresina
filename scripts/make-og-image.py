@@ -82,7 +82,7 @@ img.alpha_composite(tglow, (X - 2 * K, 318 * K)); img.alpha_composite(gimg, (X -
 bar = Image.new('RGBA', (w, h), (0, 0, 0, 0)); bdr = ImageDraw.Draw(bar)
 bdr.rounded_rectangle([X, 412 * K, X + 92 * K, 417 * K], radius=3 * K, fill=(17, 140, 255, 255))
 img.alpha_composite(bar.filter(ImageFilter.GaussianBlur(4 * K))); img.alpha_composite(bar)
-d.text((X, 440 * K), 'nexawebagency.vercel.app', font=font(22, 500), fill=(255, 255, 255, 150))
+d.text((X, 440 * K), 'nexawebagency1.vercel.app', font=font(22, 500), fill=(255, 255, 255, 150))
 
 # Vinheta suave nas bordas
 vig = (1 - radial(600, 315, 900, 560) ** 0.6) * 90
